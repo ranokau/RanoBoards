@@ -1,0 +1,141 @@
+body {
+    font-family: "Roboto Slab", cursive;
+    background: linear-gradient(135deg, #e0efe3 10%, #a7d49b 100%);
+    color: #006400; /* Este es un ejemplo de un verde oscuro */
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Cambia a column para distribución vertical */
+    align-items: center;
+    gap: 20px; /* Espacio entre cada división */
+    background-color: rgba(0, 128, 128, 0.2); /* Verde medio azulado con alto nivel de transparencia */
+}
+.logo {
+    display: block; /* Esto es importante para que text-align center en el elemento padre funcione */
+    width: 200px; /* O el tamaño que desees */
+    height: auto; /* Esto mantendrá la relación de aspecto */
+    margin: auto; /* Esto es para centrar horizontalmente */
+    }
+.sub_logo {
+    display: block; /* Esto es importante para que text-align center en el elemento padre funcione */
+    width: 200px; /* O el tamaño que desees */
+    height: auto; /* Esto mantendrá la relación de aspecto */
+    margin-right: auto; /* Esto alineará el elemento a la izquierda */
+    margin-left: 200px; /* Esto asegura que el elemento se pegue al borde izquierdo */
+    }
+
+.division {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ajusta la transparencia para que sea más sutil */
+    border-bottom: 3px solid transparent;
+    background-image: linear-gradient(to right, #ffffff, #e0efe3, #ffffff);
+    background-repeat: no-repeat;
+    background-size: 100% 3px;
+    background-position: bottom;
+    display: flex;
+    flex-direction: column; /* Cambio importante para alinear los elementos verticalmente */
+    width: 100%;
+    gap: 20px; /* Espacio entre el título y el resto de los elementos */
+    min-height: 100vh; /* Esto asegura que cada sección tenga al menos la altura de la ventana gráfica */
+    justify-content: center; /* Centra el contenido de la sección verticalmente */
+    align-items: center; /* Centra el contenido de la sección horizontalmente */
+}
+.division > * {
+    align-self: center; /* Centra todos los elementos excepto h2 */
+}
+
+.division h2 {
+    font-size: 44px; /* Ajusta esto al tamaño que desees */
+    font-weight: bold; /* Hace que el texto sea negrita */
+    align-self: flex-start; /* Alinea h2 a la izquierda */
+    width: 100%; /* Asegúrate de que h2 ocupe el ancho completo para alinearse correctamente */
+    margin-left: 200px; /* O un valor específico que prefieras */
+    /* Otros estilos que desees aplicar a los títulos h2 */
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    align-items: center;
+    gap:10px;
+    /* Otros estilos necesarios para el contenedor de contenido */
+}
+
+.current-values {
+    flex: 1; /* Cada sección ocupa 1/3 del espacio */
+    display: flex;
+    flex-direction: row; /* Para que los elementos internos se apilen horizontalmente */
+    align-items: column;
+    gap: 10px; /* Espacio entre elementos internos */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual tamaño */
+    grid-gap: 20px; /* Espacio entre los elementos de la cuadrícula */
+    justify-items: center; /* Centra los elementos horizontalmente */
+    width: 100%; /* Asegura que el contenedor ocupe el ancho disponible */
+}
+.buttons {
+    flex: 1; /* Cada sección ocupa 1/3 del espacio */
+    display: flex;
+    flex-direction: row; /* Para que los elementos internos se apilen verticalmente */
+    align-items: center;
+    gap: 30px; /* Espacio entre elementos internos */
+    margin-left: 200px; /* O un valor específico que prefieras */
+}
+.chart-container {  
+    transition: transform 0.3s ease; /* Suaviza la transición */
+    transform-origin: center; /* Asegura que el zoom se haga desde el centro */
+    margin-right: 100px; /* Baja un poco la sección del medio */
+}
+.chart-container:hover {
+    transform: scale(1.3); /* Aumenta el tamaño del contenedor y, por lo tanto, del gráfico */
+}
+.value-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+.value-box img {
+    margin-bottom: 5px; /* Espacio entre el icono y el texto */
+}
+.value-box span {
+    display: block; /* Asegura que el texto ocupe su propia línea */
+    text-align: center; /* Centra el texto horizontalmente */
+    font-size: 30px; /* Ajusta este valor al tamaño de fuente deseado */
+}
+canvas {
+    width: 100% !important;
+    max-width: 700px; /* Ancho máximo para los gráficos */
+    height: 360px !important; /* Altura fija para los gráficos */
+}
+
+
+.circular-button {
+border-radius: 50%; /* Esto hace que el botón sea circular */
+width: 80px; /* Anchura del botón */
+height: 80px; /* Altura del botón */
+border: none; /* Elimina el borde por defecto */
+font-family: "Roboto Slab", cursive;
+background-color: transparent; /* Color de fondo del botón */
+padding:0;
+cursor: pointer; /* Cambia el cursor a tipo 'pointer' */
+}
+
+.circular-button:hover {
+background-color: transparent; /* Cambio de color al pasar el mouse */
+}
+.circular-button-on {
+background-color: transparent; /* verde claro */
+/* otros estilos para el botón encendido */
+}
+
+.circular-button-off {
+background-color:transparent; /* verde oscuro */
+/* otros estilos para el botón apagado */
+}
+.circular-button img {
+    width: 100%; /* ajusta esto según el tamaño de tu icono */
+    height: auto;
+}

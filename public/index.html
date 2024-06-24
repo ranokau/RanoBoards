@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: #333;
+    }
+    .container {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 50px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      margin-bottom: 50px;
+      font-size: 2.5em;
+      color: #00ff15;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap; /* Para que los botones se ajusten mejor en pantallas pequeñas */
+    }
+    .button {
+      display: inline-block;
+      width: 250px;
+      padding: 20px;
+      font-size: 18px;
+      background-color: #00ff15;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    .button:hover {
+      background-color: #00ff15;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bienvenido RanoKauer</h1>
+    <div class="button-container">
+      <a href="/suministros" class="button">Suministros</a>
+      <a href="/actividades" class="button">Actividades</a>
+      <a href="/monitoreo" class="button">Monitoreo</a>
+    </div>
+  </div>
+</body>
+</html>
+

@@ -1,0 +1,117 @@
+.card {
+  border: 1px solid #e0e0e0;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+.card-title {
+  font-size: 3px; /* Ajusta este valor según sea necesario */
+}
+
+.card-collapsed {
+  max-height: 50px;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+
+.card-expanded {
+  max-height: 300px;
+}
+
+.triangle-container {
+  display: grid;
+  grid-template-areas:
+    "column2 column2"
+    "column1 column3";
+  justify-items: center;
+  align-items: center;
+  gap: 200px;
+  height: 100vh;
+}
+
+.triangle-column1 {
+  grid-area: column1;
+}
+
+.triangle-column2 {
+  grid-area: column2;
+}
+
+.triangle-column3 {
+  grid-area: column3;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+
+.column {
+  flex: 1;
+  background-color: #f0f0f0;
+  padding: 16px;
+  border-radius: 8px;
+  min-height: 200px;
+}
+
+.column h2 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.card {
+  background-color: white;
+  padding: 16px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: grab;
+}
+
+.card:hover {
+  background-color: #e0e0e0;
+}
+
+.task-creator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.task-creator input,
+.task-creator textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.task-creator button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-creator button:hover {
+  background-color: #0056b3;
+}

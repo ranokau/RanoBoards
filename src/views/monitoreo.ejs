@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Control</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/css/estilos.css">
+    <style>
+        .back-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        }
+        .back-button:hover {
+         background-color: #0056b3;
+        }
+        /* Estilos para la top-section */
+        .top-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        /* Añade cualquier otro estilo que necesites para esta sección */
+        }
+        .icon-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Crea dos columnas de igual ancho */
+            gap: 10px; /* Espacio entre los iconos */
+            padding: 10px; /* Espacio interior */
+            border: 3px solid #ccc; /* Borde */
+            border-radius: 10px; /* Bordes curvos */
+            width: calc(100px * 2 + 20px); /* Ajusta esto basado en el tamaño de tus iconos y el gap */
+            margin: auto; /* Centra el contenedor en su contenedor padre */
+            place-items: center; /* Centra los items tanto horizontal como verticalmente */
+            position: relative;
+            }
+
+        .icon-title {
+            grid-column: 1 / -1; /* Hace que el título ocupe todo el ancho del contenedor */
+            width: 100%;
+            text-align: center;
+            margin-bottom: 20px; /* Espacio entre el título y los iconos */
+            max-width: 200px; /* O un tamaño específico que prefieras */
+            height: auto; /* Mantiene la proporción de la imagen */
+            margin-bottom: 20px; /* Espacio entre la imagen del título y los iconos */
+        }
+
+        .icon-container img{
+        margin-right: 10px; /* Ajusta el margen si es necesario */
+        }
+        .icon-container a {
+        display: inline-flex; /* O "block", dependiendo de tu layout */
+        margin: 0; /* Asegúrate de no tener márgenes no deseados */
+        padding: 0; /* Elimina el padding por defecto si es necesario */
+        border: none; /* Elimina bordes si se añadieron automáticamente */
+        }
+        .smooth-scroll.icono-container {
+        position: relative;
+        display: inline-block; /* Cambia el elemento <a> a un bloque en línea para manejar correctamente el posicionamiento relativo */
+        }
+
+        .smooth-scroll.icono-container:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+        }
+
+
+        .camera-container {
+            margin-left: 250px; /* Esto empuja el contenedor de la cámara hacia la derecha */
+            margin-right: 20px; /* Ajusta este valor según sea necesario */
+        }
+
+        /* Ajusta el tamaño de tus iconos y cámara según sea necesario */
+        .icon {
+        width: 100px; /* Ejemplo de tamaño para los iconos */
+        height: 100px;
+        }
+        .camera-dashboard {
+            transition: transform 0.3s ease; /* Suaviza la transición */
+            width: 650px; /* Ejemplo de tamaño para el icono de la cámara */
+        }
+        .camera-container:hover .camera-dashboard {
+        transform: scale(1.8); /* Aumenta el tamaño de la imagen en un 10% */
+        }
+
+        .circular-button {
+        position: relative;
+        display: inline-block; /* Asegura que el botón maneje correctamente el contenido interno */
+        /* Aplica cualquier otro estilo que necesites para tus botones */
+        }
+
+        .tooltip {
+        visibility: hidden;
+        width: 120px; /* Ajusta según el tamaño deseado del tooltip */
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        }
+
+        .circular-button:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+        }
+        .value-box {
+        position: relative; /* Posicionamiento relativo para el contenedor del tooltip */
+        /* Otros estilos para .value-box */
+        }
+
+        .tooltip {
+        visibility: hidden;
+        width: 120px; /* O ajusta según el contenido del tooltip */
+        background-color: rgb(0, 0, 0);
+        color: white;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        }
+
+        .value-box:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+        }
+        .value-box .tooltip {
+        font-size: 14px; /* O el tamaño que prefieras para los tooltips */
+        /* Asegúrate de redefinir cualquier otro estilo de tooltip aquí si es necesario */
+        }
+        #chat-container {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        #chat-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #chat-content {
+            display: none;
+            padding: 10px;
+        }
+
+        #chat-messages {
+            height: 200px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #chat-input {
+            width: calc(100% - 60px);
+            padding: 5px;
+        }
+
+        .chat-closed #chat-content {
+            display: none;
+        }
+
+        .chat-open #chat-content {
+            display: block;
+        }
+
+
+
+    </style>
+</head>
+<body>
+  <a href="/" class="back-button">Inicio</a>
+  <header >
+    <img src="imagenes/rano_scanner.png" alt="RANO Scanner Logo" class="logo" style="width: 600px;"">
+    </header>
+
+    <div class="top-section">
+        <div class="icon-container">
+            <img src="imagenes/estado_actual_2.png" alt="Título" class="icon-title">
+            <!-- Reemplaza # con las rutas a tus imágenes de iconos -->
+            <a href="#climatizacion" class="smooth-scroll icono-container">
+                <img src="imagenes/climatizacion.png" alt="Icono 1" class="icon" id="icono-climatizacion">
+                <span class="tooltip">Simbolo de condiciones del clima de tu invernadero</span>
+            </a>
+            
+            <a href="#nutricion" class="smooth-scroll icono-container">
+                <img src="imagenes/minerales_off.png" alt="Icono 2" class="icon">
+                <span class="tooltip">Simbolo de condiciones de la nutricion de tus plantas.</span>
+            </a>
+            <a href="#luminosidad" class="smooth-scroll icono-container">
+                <img src="imagenes/luz_artificial.png" alt="Icono 3" class="icon">
+                <span class="tooltip">Simbolo de condiciones de luminosidad en tu invernadero</span>
+            </a>
+            <a href="#riego" class="smooth-scroll icono-container">
+                <img src="imagenes/flujo_de_aire.png" alt="Icono 4" class="icon">
+                <span class="tooltip">Simbolo de condiciones del sistema de flujo de tu invernadero</span>
+            </a>
+        </div>
+        <div class="camera-container">
+            <!-- Reemplaza # con la ruta a tu imagen de la cámara -->
+            <img src="http://192.168.31.188:8080/video" alt="Cámara en Vivo" class="camera-dashboard">
+
+        </a>
+        </div>
+    </div>
+  <div class="division" id="climatizacion">
+    <img src="imagenes/clima.png" alt="RANO Scanner Logo" class="sub_logo" style="width: 200px;"">
+    <div class="content">
+      <div class="buttons">
+          <!-- Botones para Climatización aquí -->
+          <button  class="circular-button" onclick="toggleButton(this)" onmouseover="changeIcon(this, 'imagenes/ventilacion_on.png')" onmouseout="changeIcon(this, 'imagenes/ventilacion_off.png')" data-on="imagenes/ventilacion_on.png" data-off="imagenes/ventilacion_off.png" data-is-on="false">
+            <img src="imagenes/ventilacion_off.png" alt="Boton Ventilacion" />
+            <span class="tooltip">Ventilación y extraccion</span>
+          </button>
+          <button class="circular-button" onclick="toggleButton(this)" onmouseover="changeIcon(this, 'imagenes/humedad_on.png')" onmouseout="changeIcon(this, 'imagenes/humedad_off.png')" data-on="imagenes/humedad_on.png" data-off="imagenes/humedad_off.png" data-is-on="false">
+            <img src="imagenes/humedad_off.png" alt="Boton Humedad" />
+            <span class="tooltip">nebulizacion</span>
+          </button>
+      </div>
+      <div class="current-values move-on-hover">
+        <div class="value-box" data-series="temperatura">
+            <img id="icono-temperatura" src="imagenes/temperatura.png" alt="Temperatura" style="width: 80px; height: 80px;">
+            <span id="valor-temperatura">24°C</span>
+            <span class="tooltip">Temperatura Ambiental del invernadero</span> <!-- Tooltip agregado -->
+        </div>
+        <div class="value-box move-on-hover" data-series="humedad">
+            <img src="imagenes/humedad_normal_2.png" alt="Humedad" style="width: 80px; height: 80px;">
+            <span id="valor-humedad">60%</span>
+            <span class="tooltip">Humedad Relativa del invernadero</span> <!-- Tooltip agregado -->
+        </div> 
+        <div class="value-box move-on-hover" data-series="co2">
+            <img src="imagenes/co2.png" alt="Co2" style="width: 80px; height: 80px;">
+            <span id="valor-co2">400ppm</span>
+            <span class="tooltip">Concentracion de dioxido de carbono en el invernadero</span> <!-- Tooltip agregado -->
+        </div>
+        <div class="value-box move-on-hover" data-series="vpd">
+          <img src="imagenes/vpd.png" alt="vpd" style="width: 55px; height: 60px;">
+          <span id="valor-vpd">400ppm</span>
+          <span class="tooltip">valor de diferencia de presion de vapor</span> <!-- Tooltip agregado -->
+      </div>
+    </div>     
+      <div class="chart-container">
+          <!-- Gráfico para Climatización aquí -->
+          <canvas id="climaChart"></canvas>
+      </div>
+  </div>
+</div>
+  <div class="division" id="nutricion">
+    <h2><span style="color: #006400;">Nutri</span><span style="color: #90EE90;">ción</span></h2>
+
+    <div class="content">
+      <div class="buttons">
+        <!-- Botones para Nutricion aquí -->
+        <button  class="circular-button" onclick="toggleButton(this)" onmouseover="changeIcon(this, 'imagenes/minerales_on.png')" onmouseout="changeIcon(this, 'imagenes/minerales_off.png')" data-on="imagenes/minerales_on.png" data-off="imagenes/minerales_off.png" data-is-on="false">
+          <img src="imagenes/minerales_off.png" alt="Boton EC" />
+          <span class="tooltip">nebulizacion</span>
+        </button>
+        <button class="circular-button" onclick="toggleButton(this)" onmouseover="changeIcon(this, 'imagenes/medidor_ph_on.png')" onmouseout="changeIcon(this, 'imagenes/medidor_ph_off.png')" data-on="imagenes/medidor_ph_on.png" data-off="imagenes/medidor_ph_off.png" data-is-on="false">
+          <img src="imagenes/medidor_ph_off.png" alt="Boton PH sube" />
+          <span class="tooltip">nebulizacion</span>
+        </button>
+        </div>
+        <div class="current-values" >
+          <div class="value-box " data-series="ec" onmouseover="changeIcon(this, 'imagenes/minerales_on.png')" onmouseout="changeIcon(this, 'imagenes/minerales_off.png')"data-on="imagenes/minerales_on.png" data-off="imagenes/minerales_off.png" data-is-on="false">
+              <img src="imagenes/minerales_off.png" alt="ec" style="width: 80px; height: 80px;">
+              <span id="valor-ec"></span>
+              <span class="tooltip">Concentracion de electroconductividad</span> <!-- Tooltip agregado -->
+          </div>
+          <div class="value-box move-on-hover-2" data-series="ph"onmouseover="changeIcon(this, 'imagenes/medidor_ph_on.png')" onmouseout="changeIcon(this, 'imagenes/medidor_ph_off.png')"data-on="imagenes/medidor_ph_on.png" data-off="imagenes/medidor_ph_off.png" data-is-on="false">
+              <img src="imagenes/medidor_ph_off.png" alt="ph" style="width: 80px; height: 80px;">
+              <span id="valor-ph">60%</span>
+              <span class="tooltip">valor de ph del agua</span> <!-- Tooltip agregado -->
+          </div> 
+          <div class="value-box " data-series="o2">
+              <img src="imagenes/o2.png" alt="o2" style="width: 80px; height: 80px;">
+              <span id="valor-o2">400ppm</span>
+              <span class="tooltip">Cantidad de oxigeno disuelto en el agua</span> <!-- Tooltip agregado -->
+          </div>
+          <div class="value-box move-on-hover-2" data-series="temp">
+            <img src="imagenes/temperatura.png" alt="temp" style="width: 80px; height: 80px;">
+            <span id="valor-temp">400ppm</span>
+            <span class="tooltip">Temperatura del agua</span> <!-- Tooltip agregado -->
+        </div>
+      </div>
+        <div class="chart-container">
+            <!-- Gráfico para Nutrición aquí -->
+            <canvas id="nutricionChart"></canvas>
+        </div>
+      </div>
+  </div>
+  <div class="division" id="luminosidad">
+    <h2><span style="color: #006400;">Ilumi</span><span style="color: #90EE90;">nación</span></h2>
+
+    <div class="content">
+        <div class="buttons">
+                <button class="circular-button" onclick="toggleButton(this)" onmouseover="changeIcon(this, 'imagenes/medidor_ph_on.png')" onmouseout="changeIcon(this, 'imagenes/medidor_ph_off.png')" data-on="imagenes/medidor_ph_on.png" data-off="imagenes/medidor_ph_off.png" data-is-on="false">
+                    <img src="imagenes/medidor_ph_off.png" alt="Boton luces" />
+                    <span class="tooltip">nebulizacion</span>
+                </button>
+                <button class="circular-button" onclick="toggleButton(this)" onmouseover="changeIcon(this, 'imagenes/medidor_ph_on.png')" onmouseout="changeIcon(this, 'imagenes/medidor_ph_off.png')" data-on="imagenes/medidor_ph_on.png" data-off="imagenes/medidor_ph_off.png" data-is-on="false">
+                    <img src="imagenes/medidor_ph_off.png" alt="Boton frecuencia" />
+                    <span class="tooltip">nebulizacion</span>
+                </button>
+        </div>
+      <div class="current-values">
+            <div class="value-box " data-series="ec" onmouseover="changeIcon(this, 'imagenes/minerales_on.png')" onmouseout="changeIcon(this, 'imagenes/minerales_off.png')"data-on="imagenes/minerales_on.png" data-off="imagenes/minerales_off.png" data-is-on="false">
+                <img src="imagenes/minerales_off.png" alt="ec" style="width: 80px; height: 80px;">
+                <span id="valor-ec"></span>
+                <span class="tooltip">receta de las plantas</span> <!-- Tooltip agregado -->
+            </div>
+            <div class="value-box move-on-hover-2" data-series="ph"onmouseover="changeIcon(this, 'imagenes/medidor_ph_on.png')" onmouseout="changeIcon(this, 'imagenes/medidor_ph_off.png')"data-on="imagenes/medidor_ph_on.png" data-off="imagenes/medidor_ph_off.png" data-is-on="false">
+                <img src="imagenes/medidor_ph_off.png" alt="ph" style="width: 80px; height: 80px;">
+                <span id="valor-ph">60%</span>
+                <span class="tooltip">intensidad de luz</span> <!-- Tooltip agregado -->
+            </div> 
+            <div class="value-box " data-series="o2">
+                <img src="imagenes/o2.png" alt="o2" style="width: 80px; height: 80px;">
+                <span id="valor-o2">400ppm</span>
+                <span class="tooltip">fotoperiodo</span> <!-- Tooltip agregado -->
+            </div>
+            <div class="value-box move-on-hover-2" data-series="temp">
+              <img src="imagenes/temperatura.png" alt="temp" style="width: 80px; height: 80px;">
+              <span id="valor-temp">400ppm</span>
+              <span class="tooltip">receta plantas 2</span> <!-- Tooltip agregado -->
+          </div>
+      </div>
+      <div class="chart-container">
+          <!-- Gráfico para Nutrición aquí -->
+          <canvas id="lightChart"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="division" id="riego">
+    <h2>
+      <span style="color: #006400;">Control</span> <!-- Verde oscuro -->
+      <span style="color: #90EE90;">Riego</span> <!-- Verde claro -->
+    </h2>
+    <div class="content">
+        <div class="buttons">
+                <button class="circular-button" onclick="toggleButton(this)" onmouseover="changeIcon(this, 'imagenes/bomba_agua_on.png')" onmouseout="changeIcon(this, 'imagenes/bomba_agua_off.png')" data-on="imagenes/bomba_agua_on.png" data-off="imagenes/bomba_agua_off.png" data-is-on="false">
+                    <img src="imagenes/bomba_agua_off.png" alt="Boton Bomba 1" />
+                    <span class="tooltip">Bomba raiz flotante</span>
+                </button>
+                <button class="circular-button" onclick="toggleButton(this)" onmouseover="changeIcon(this, 'imagenes/bomba_agua_on.png')" onmouseout="changeIcon(this, 'imagenes/bomba_agua_off.png')" data-on="imagenes/bomba_agua_on.png" data-off="imagenes/bomba_agua_off.png" data-is-on="false">
+                    <img src="imagenes/bomba_agua_off.png" alt="Boton Bomba 2" />
+                    <span class="tooltip">Bomba NFT</span>
+                </button>
+        </div>
+      <div class="current-values">
+        <div class="value-box " data-series="ec" onmouseover="changeIcon(this, 'imagenes/minerales_on.png')" onmouseout="changeIcon(this, 'imagenes/minerales_off.png')"data-on="imagenes/minerales_on.png" data-off="imagenes/minerales_off.png" data-is-on="false">
+            <img src="imagenes/minerales_off.png" alt="ec" style="width: 80px; height: 80px;">
+            <span id="valor-ec"></span>
+            <span class="tooltip">flujo del sistema</span> <!-- Tooltip agregado -->
+        </div>
+        <div class="value-box move-on-hover-2" data-series="ph"onmouseover="changeIcon(this, 'imagenes/medidor_ph_on.png')" onmouseout="changeIcon(this, 'imagenes/medidor_ph_off.png')"data-on="imagenes/medidor_ph_on.png" data-off="imagenes/medidor_ph_off.png" data-is-on="false">
+            <img src="imagenes/medidor_ph_off.png" alt="ph" style="width: 80px; height: 80px;">
+            <span id="valor-ph">60%</span>
+            <span class="tooltip">nivel de agua estanque 1</span> <!-- Tooltip agregado -->
+        </div> 
+        <div class="value-box " data-series="o2">
+            <img src="imagenes/o2.png" alt="o2" style="width: 80px; height: 80px;">
+            <span id="valor-o2">400ppm</span>
+            <span class="tooltip">nivel de agua estanque 2</span> <!-- Tooltip agregado -->
+        </div>
+        <div class="value-box move-on-hover-2" data-series="temp">
+          <img src="imagenes/temperatura.png" alt="temp" style="width: 80px; height: 80px;">
+          <span id="valor-temp">400ppm</span>
+          <span class="tooltip">ph bomba de osmosis</span> <!-- Tooltip agregado -->
+        </div>
+      </div>
+      <div class="chart-container">
+          <!-- Gráfico para Riego aca aquí -->
+          <canvas id="riegoChart"></canvas>
+      </div>
+    </div>
+  </div>
+</div>  
+<div id="chat-container" class="chat-closed">
+    <div id="chat-header" onclick="toggleChat()">Gaston el pimenton</div>
+    <div id="chat-content">
+        <div id="chat-messages"></div>
+        <input type="text" id="chat-input" placeholder="Escribe tu mensaje aquí...">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+</div>
+
+  <script src="/js/dashboard.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Selecciona todos los enlaces con la clase 'smooth-scroll'
+      const enlaces = document.querySelectorAll('a.smooth-scroll');
+    
+      enlaces.forEach(enlace => {
+        enlace.addEventListener('click', function(e) {
+          e.preventDefault(); // Previene el comportamiento predeterminado
+          // Busca el destino utilizando el valor de 'href' del enlace
+          const destino = document.querySelector(this.getAttribute('href'));
+    
+          destino.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start' // Alinea el destino en la parte superior de la vista
+          });
+        });
+      });
+    });
+    function toggleChat() {
+            const chatContainer = document.getElementById('chat-container');
+            chatContainer.classList.toggle('chat-open');
+            chatContainer.classList.toggle('chat-closed');
+        }
+    async function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            if (message) {
+                displayMessage(message, 'Tú');
+                input.value = ''; // Limpia el input
+
+                try {
+                    const response = await fetch('/chat', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ message })
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        displayMessage(data.message, 'ChatGPT');
+                    } else {
+                        console.error('Error al recibir respuesta del servidor');
+                    }
+                } catch (error) {
+                    console.error('Error al enviar mensaje:', error);
+                }
+            }
+        }
+
+
+        function displayMessage(message, sender) {
+            const chatMessages = document.getElementById('chat-messages');
+            const msgElement = document.createElement('div');
+            msgElement.textContent = `${sender}: ${message}`;
+            chatMessages.appendChild(msgElement);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Puedes agregar aquí más código de inicialización si es necesario
+        });
+
+    </script>
+    
+</body>
+</html>

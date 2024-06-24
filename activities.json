@@ -1,0 +1,56 @@
+{
+    "monday": [
+      { "title": "Cosechar", "description": "Es necesario cosechar lo necesario para 15 mix de hojas para frest" },
+      { "title": "Embolsar mixes", "description": "Empaquetar 15 mix de hojas con fecha" },
+      { "title": "Imagen lechugas plantinera", "description": "Es necesario sacar foto a las lechugas de la plantinera con la luz superior encendida y adjuntar la imagen como archivo " },
+      { "title": "Imagen invernadero plantinera", "description": "Es necesario sacar foto a las lechugas en el invernadero y adjuntar la imagen como archivo " },
+      { "title": "Monitoreo de cultivo", "description": "Se realiza un monitoreo de los cultivo y en caso de existir insectos, se presenta una imagen con una descripcion del monitoreo" },
+      { "title": "limpiar", "description": "Limpiar invernadero" }
+
+    ],
+    "tuesday": [
+      { "title": "Germinar", "description": "Germinar 237 lechugas lollo biondas" },
+      { "title": "Germinar", "description": "Germinar 237 lechugas lollo rosa" },
+      { "title": "Germinar", "description": "Germinar 32 tatsoi" },
+      { "title": "Germinar", "description": "Germinar 32 Mizuna" },
+      { "title": "Germinar", "description": "Germinar 32 acelga tallo morado" },
+      { "title": "Germinar", "description": "Germinar 32 acelga yallo amarillo" },
+      { "title": "Germinar", "description": "Germinar 32 kale" },
+      { "title": "Microorganismos", "description": "Aplicar 50ml de microorganismos eficientes en el estanque del invernadero" }
+    ],
+    "wednesday": [
+        { "title": "Cosechar", "description": "Es necesario cosechar lo necesario para 15 mix de hojas para frest" },
+        { "title": "Embolsar", "description": "Empaquetar 15 mix de hojas con fecha" },
+        { "title": "Imagen", "description": "Es necesario sacar foto a las lechugas de la plantinera con la luz superior encendida y adjuntar la imagen como archivo " },
+        { "title": "Imagen ", "description": "Es necesario sacar foto a las lechugas en el invernadero y adjuntar la imagen como archivo " },
+        { "title": "limpiar", "description": "Limpiar invernadero" }
+    ],
+    "thursday": [
+      { "title": "Transplantar", "description": "Transplantar Tatsoi" },
+      { "title": "Transplantar", "description": "Transplantar Lechugas Lollo bionda" },
+      { "title": "Transplantar", "description": "Transplantar Lechugas Lollo Rosa" },
+      { "title": "Transplantar", "description": "Transplantar Acelga tallo morado" },
+      { "title": "Transplantar", "description": "Transplantar Acelga tallo amarillo" },
+      { "title": "Transplantar", "description": "Transplantar Kale" },
+      { "title": "Transplantar", "description": "Transplantar Mizuna" },
+      { "title": "Fumigacion Preventiva ", "description": "Es necesario hacer una fumigacion en una concentracion al 0.3% (300ml/100ml) en el invernadero." },
+      { "title": "Aplicar agua Oxigenada ", "description": "Se aplica numero ml de agua oxigenada en el estanque " }
+      
+    ],
+    "friday": [ 
+        { "title": "Cosechar", "description": "Es necesario cosechar lo necesario para 15 mix de hojas para frest" },
+        { "title": "Embolsar mixes", "description": "Empaquetar 15 mix de hojas con fecha" },
+        { "title": "Imagen lechugas plantinera", "description": "Es necesario sacar foto a las lechugas de la plantinera con la luz superior encendida y adjuntar la imagen como archivo " },
+        { "title": "Imagen invernadero plantinera", "description": "Es necesario sacar foto a las lechugas en el invernadero y adjuntar la imagen como archivo " },
+        { "title": "limpiar", "description": "Limpiar invernadero" }
+    ],
+    "saturday": [
+      { "title": "Tarea Sábado 1", "description": "Descripción Sábado 1" },
+      { "title": "Tarea Sábado 2", "description": "Descripción Sábado 2" }
+    ],
+    "sunday": [
+      { "title": "Tarea Domingo 1", "description": "Descripción Domingo 1" },
+      { "title": "Tarea Domingo 2", "description": "Descripción Domingo 2" }
+    ]
+  }
+  
